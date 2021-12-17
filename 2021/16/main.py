@@ -30,4 +30,13 @@ for number in signal[0].strip():
     bits = hexdict[number]
     bitstream=bitstream+bits
 
-print(bitstream)
+def read3bits(stream,index):
+    valuestr = stream[index]+stream[index+1]+stream[index+2]
+    value = int(valuestr,2)
+    return (index,value)    
+
+index = 0
+index, value = read3bits(bitstream,index)
+index, value2 = read3bits(bitstream,index)
+print(value,value2)
+
