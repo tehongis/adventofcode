@@ -37,13 +37,35 @@ scores = {
     'CZ':3+3
     }
 
+"""
+X means you need to lose, 
+Y means you need to end the round in a draw
+Z means you need to win. Good luck!
+"""
+scores2 = {
+    'AX':3+0,
+    'AY':1+3,
+    'AZ':2+6,
+    'BX':1+0,
+    'BY':2+3,
+    'BZ':3+6,
+    'CX':2+0,
+    'CY':3+3,
+    'CZ':1+6
+    }
+ 
+
 totalscore = 0
+totalscore2 = 0
 for line in data:
     line=line.strip()
     game=line[0]+line[2]
     score=scores[game]
     totalscore += score
+    score2=scores2[game]
+    totalscore2 += score2
     print(line,score,totalscore)
+    print(line,score2,totalscore2)
     #time.sleep(1)
     
 # 13099 too low
