@@ -5,11 +5,14 @@
 import time
 from pprint import pprint
 
+f = open('input.txt','r')
+data = f.readlines()
+f.close()
+
 """
 A for Rock
 B for Paper
 C for Scissors
-
 X for Rock
 Y for Paper
 Z for Scissors
@@ -24,28 +27,23 @@ plus the score for the outcome of the round
 
 scores = {
     'AX':1+3,
-    'AY':1+6,
-    'AZ':1+0,
-    'BX':2+0,
+    'AY':2+6,
+    'AZ':3+0,
+    'BX':1+0,
     'BY':2+3,
-    'BZ':2+6,
-    'CX':3+6,
-    'CY':3+0,
+    'BZ':3+6,
+    'CX':1+6,
+    'CY':2+0,
     'CZ':3+3
-}
-
-from pprint import pprint
-
-f = open('input.txt','r')
-data = f.readlines()
-f.close()
+    }
 
 totalscore = 0
 for line in data:
     line=line.strip()
     game=line[0]+line[2]
     score=scores[game]
-    totalscore=totalscore+score
-print(totalscore)
+    totalscore += score
+    print(line,score,totalscore)
+    #time.sleep(1)
     
 # 13099 too low
