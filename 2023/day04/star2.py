@@ -10,7 +10,13 @@ results = []
 
 
 def getWins(card):
-    return results[card]
+    value = 0
+    for count in range(card,card+results[card]):
+        print("\t"+str(count),end="")
+        temp = results[count]
+        print( "\t\t:" + str(temp) )
+        value = value + temp
+    return value
 
 for row_number,line in enumerate(inputdata):
     line = line.strip()
@@ -33,9 +39,15 @@ for row_number,line in enumerate(inputdata):
                 wins = wins + 1
     results.append(wins)
 
-total_wins = 0
+cumulative = []
 for index,result in enumerate(results):
-    total_wins = total_wins + result
-    print(index+1, result)
+    print(result)
+    value = getWins(index)
+    print("\t\t"+str(value))
+    cumulative.append( value )
+    if index == 5:
+        break
 
-print(total_wins)
+
+#for index,result in enumerate(results):
+#    print(results[index],cumulative[index])
