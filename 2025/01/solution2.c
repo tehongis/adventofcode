@@ -231,35 +231,32 @@ int main(void)
     char *line;
     char direction;
     long number;
-    long clippedNumber;
-    int fullRotations = 0;
     
     while ((line = get_next_line()) != NULL) {
         if (parse_line(line, &direction, &number)) {
 
-            
-            fullRotations = (int) (number / 100);
-
-            //printf("%d : %ld\n",fullRotations, number);
-
-            clippedNumber = number % 100;
 
             if (direction == 'L') {
-                clippedNumber = -clippedNumber;
+                long int tempNumber = -number;
+                while(tempNumber < 0) {
+                    tempNumber = tempNumber + 1;
+                    dialPosition = ((dialPosition - 1) + 100 )% 100;
+                    if (dialPosition == 0) {
+                        zeroCount= zeroCount + 1;
+                        }
+                    }
+                } else {
+                    long int tempNumber = number;
+                    while(tempNumber > 0) {
+                        tempNumber = tempNumber - 1;
+                        dialPosition = ((dialPosition +1 )+ 100 )% 100;
+                        if (dialPosition == 0) {
+                            zeroCount= zeroCount + 1;
+                            }
+                    }
             }
 
-            if (dialPosition + clippedNumber < 0 ) {
-                fullRotations = fullRotations + 1;
-            }
-
-            dialPosition = ( dialPosition + clippedNumber + 100 ) % 100;
-
-            zeroCount= zeroCount + fullRotations;
-            if (dialPosition == 0) {
-                zeroCount= zeroCount + 1;
-            }
-
-            printf("Direction: %c, Number: %ld, Clippednumber: %ld, Full fullRotations: %d, Dial Position: %ld , Zero Count: %d\n", direction, number,clippedNumber, fullRotations, dialPosition, zeroCount);
+            printf("Direction: %c, Number: %ld, Dial Position: %ld , Zero Count: %d\n", direction, number, dialPosition, zeroCount);
         } else {
             printf("Failed to parse line: %s\n", line);
         }
@@ -272,3 +269,4 @@ int main(void)
 
     return 0;
 }
+
